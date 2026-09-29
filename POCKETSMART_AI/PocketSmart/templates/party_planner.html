@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Party planner{% endblock %}
+{% block content %}
+<header class="pagehead"><h1>Party budget planner</h1><p>Plan your event with an AI-built budget.</p></header>
+<div class="wrap">
+  <form id="f" class="card">
+    <div class="row">
+      <div><label>Total budget (₹)</label><input name="total_budget" type="number" min="1" step="any" value="50000" required></div>
+      <div><label>Number of guests</label><input name="num_guests" type="number" min="1" value="30" required></div>
+      <div><label>Party type</label>
+        <select name="party_type"><option>birthday</option><option>wedding</option><option>corporate</option><option>anniversary</option><option>baby shower</option><option>farewell</option></select></div>
+      <div><label>Venue type</label>
+        <select name="venue_type"><option>Home</option><option>Banquet hall</option><option>Restaurant</option><option>Outdoor or garden</option><option>Hotel</option><option>Office</option></select></div>
+    </div>
+    <label>Party needs</label>
+    <div class="check">
+      <label><input type="checkbox" name="needs_catering" checked> Catering</label>
+      <label><input type="checkbox" name="needs_decoration" checked> Decoration</label>
+      <label><input type="checkbox" name="needs_entertainment" checked> Entertainment</label>
+    </div>
+    <label>Additional requirements</label><textarea name="additional_requirements" rows="3" placeholder="Theme, dietary restrictions, special requests..."></textarea>
+    <p><button type="submit" class="btn" data-label="Generate budget plan">Generate budget plan</button></p>
+  </form>
+  <div id="result"></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>wirePlanner('/party-budget', 'party');</script>{% endblock %}

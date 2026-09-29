@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Jewelry planner{% endblock %}
+{% block content %}
+<header class="pagehead"><h1>Jewelry budget planner</h1><p>Get jewelry ideas that fit your occasion, style and budget.</p></header>
+<div class="wrap">
+  <form id="f" class="card" enctype="multipart/form-data">
+    <label>Total budget (₹)</label><input name="total_budget" type="number" min="1" step="any" value="25000" required>
+    <label>Occasion</label>
+    <select name="occasion"><option>Birthday</option><option>Wedding</option><option>Anniversary</option><option>Festival</option><option>Party</option><option>Office</option><option>Casual outing</option></select>
+    <label>Style preferences</label><textarea name="preferences" rows="3" placeholder="Materials, colors, minimal or statement..."></textarea>
+    <label>Outfit image (optional)</label>
+    <input id="img" name="image" type="file" accept="image/png,image/jpeg,image/webp">
+    <div id="prev"></div>
+    <p><button type="submit" class="btn" data-label="Get recommendations">Get recommendations</button></p>
+  </form>
+  <div id="result"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+wirePlanner('/jewelry-budget', 'jewelry', true);
+$('#img').addEventListener('change', e => {
+  const f = e.target.files[0];
+  $('#prev').innerHTML = f ? `<img class="prev" alt="Outfit preview" src="${URL.createObjectURL(f)}">` : '';
+});
+</script>
+{% endblock %}

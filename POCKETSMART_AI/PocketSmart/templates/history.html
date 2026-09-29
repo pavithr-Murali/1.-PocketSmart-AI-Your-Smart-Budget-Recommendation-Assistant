@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}History{% endblock %}
+{% block content %}
+<header class="pagehead"><h1>Your recommendation history</h1><p>Review your previous budget plans.</p></header>
+<div class="wrap"><section class="card"><div id="list"><p class="loading">Loading...</p></div></section></div>
+<dialog id="dlg"><button class="btn alt" onclick="$('#dlg').close()">Close</button><div id="detail"></div></dialog>
+{% endblock %}
+{% block scripts %}
+<script>
+api('/recommendation-history').then(d => {
+  $('#list').innerHTML = d.history.map(histRow).join('') || '<p>No plans yet. Create one from a planner.</p>';
+});
+</script>
+{% endblock %}

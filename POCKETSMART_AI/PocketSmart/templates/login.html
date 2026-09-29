@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Sign in{% endblock %}
+{% block content %}
+<div class="auth card">
+  <h2>Welcome back</h2>
+  <form id="f">
+    <label>Username</label><input name="username" required autocomplete="username">
+    <label>Password</label><input name="password" type="password" required autocomplete="current-password">
+    <p id="msg" class="notice err" hidden></p>
+    <p><button class="btn" style="width:100%">Sign in</button></p>
+  </form>
+  <p style="text-align:center">No account yet? <a href="/register">Create one</a></p>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+$('#f').addEventListener('submit', async e => {
+  e.preventDefault();
+  try { await api('/token', {method: 'POST', body: new FormData(e.target)}); location.href = '/dashboard'; }
+  catch (err) { const m = $('#msg'); m.textContent = err.message; m.hidden = false; }
+});
+</script>
+{% endblock %}

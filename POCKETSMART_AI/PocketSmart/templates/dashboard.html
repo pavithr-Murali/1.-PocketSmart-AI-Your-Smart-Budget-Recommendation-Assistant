@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<header class="pagehead"><h1>Welcome, {{ user.username }}</h1><p>Choose a planner to start a new budget plan.</p></header>
+<div class="wrap">
+  <div class="grid">
+    <div class="card"><h3>🏠 Home budget planner</h3><p>Furniture, lighting and fans within budget.</p><a class="btn" href="/home-planner">Start planning</a></div>
+    <div class="card"><h3>🎉 Party budget planner</h3><p>Venue, catering, decor and entertainment.</p><a class="btn" href="/party-planner">Start planning</a></div>
+    <div class="card"><h3>💎 Jewelry budget planner</h3><p>Pieces that match your outfit and occasion.</p><a class="btn" href="/jewelry-planner">Start planning</a></div>
+  </div>
+  <section class="card"><h3>Recent activity <small><a href="/history">View all history</a></small></h3><div id="recent"><p class="loading">Loading...</p></div></section>
+</div>
+<dialog id="dlg"><button class="btn alt" onclick="$('#dlg').close()">Close</button><div id="detail"></div></dialog>
+{% endblock %}
+{% block scripts %}
+<script>
+api('/recommendation-history').then(d => {
+  $('#recent').innerHTML = d.history.slice(0, 3).map(histRow).join('') || '<p>No plans yet. Pick a planner above to create your first one.</p>';
+});
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Home planner{% endblock %}
+{% block content %}
+<header class="pagehead"><h1>Home interior budget planner</h1><p>Create a budget plan for your home interior.</p></header>
+<div class="wrap">
+  <form id="f" class="card">
+    <label>Total budget (₹)</label><input name="total_budget" type="number" min="1" step="any" value="200000" required>
+    <div class="row">
+      <div><label>Lights / fixtures</label><input name="num_lights" type="number" min="0" value="5"></div>
+      <div><label>Ceiling fans</label><input name="num_fans" type="number" min="0" value="4"></div>
+      <div><label>Furniture pieces</label><input name="num_furniture" type="number" min="0" value="2"></div>
+      <div><label>Dining tables</label><input name="num_dining_tables" type="number" min="0" value="1"></div>
+    </div>
+    <label>Rooms to include</label>
+    <div class="check">
+      <label><input type="checkbox" name="has_living_room" checked> Living room</label>
+      <label><input type="checkbox" name="has_kitchen" checked> Kitchen</label>
+      <label><input type="checkbox" name="has_bedroom"> Bedroom</label>
+    </div>
+    <label>Special requirements</label><textarea name="additional_requirements" rows="3" placeholder="Style, colors, materials..."></textarea>
+    <p><button type="submit" class="btn" data-label="Generate recommendations">Generate recommendations</button></p>
+  </form>
+  <div id="result"></div>
+</div>
+{% endblock %}
+{% block scripts %}<script>wirePlanner('/home-budget', 'home');</script>{% endblock %}

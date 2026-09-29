@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<header class="hero">
+  <h1>PocketSmart</h1>
+  <h2>AI-powered budget planning for everyday needs</h2>
+  <p>Tell us your budget for a home makeover, a party or a jewelry purchase. Gemini builds a plan with prices in rupees and links to shop on Amazon, Flipkart, IKEA, Swiggy, Zomato, OYO and more.</p>
+  <a class="btn alt" href="{{ '/dashboard' if user else '/register' }}">Get started</a>
+</header>
+<div class="wrap">
+  <h2 style="text-align:center">Our smart budget planners</h2>
+  <div class="grid">
+    <div class="card"><h3>🏠 Home interior planner</h3><p>Lights, fans, furniture and dining tables split across your rooms without overspending.</p><a href="/home-planner">Open planner</a></div>
+    <div class="card"><h3>🎉 Party budget planner</h3><p>Venue, catering, decoration and entertainment sized to your guest count and event type.</p><a href="/party-planner">Open planner</a></div>
+    <div class="card"><h3>💎 Jewelry budget planner</h3><p>Pieces matched to your occasion, style and, optionally, a photo of your outfit.</p><a href="/jewelry-planner">Open planner</a></div>
+  </div>
+</div>
+{% endblock %}

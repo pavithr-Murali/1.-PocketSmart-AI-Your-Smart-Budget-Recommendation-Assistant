@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<div class="auth card">
+  <h2>Create your account</h2>
+  <form id="f">
+    <label>Username</label><input name="username" required minlength="3" maxlength="30" placeholder="letters, numbers, underscore">
+    <label>Email</label><input name="email" type="email" required>
+    <label>Password</label><input name="password" type="password" required minlength="6" autocomplete="new-password">
+    <label>Confirm password</label><input name="confirm" type="password" required autocomplete="new-password">
+    <p id="msg" class="notice err" hidden></p>
+    <p><button class="btn" style="width:100%">Create account</button></p>
+  </form>
+  <p style="text-align:center">Already registered? <a href="/login">Sign in</a></p>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+$('#f').addEventListener('submit', async e => {
+  e.preventDefault();
+  const d = formJSON(e.target), m = $('#msg');
+  if (d.password !== d.confirm) { m.textContent = 'Passwords do not match'; m.hidden = false; return; }
+  try {
+    await api('/register', {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username: d.username, email: d.email, password: d.password})});
+    location.href = '/login';
+  } catch (err) { m.textContent = err.message; m.hidden = false; }
+});
+</script>
+{% endblock %}
